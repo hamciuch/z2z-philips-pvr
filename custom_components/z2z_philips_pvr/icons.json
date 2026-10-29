@@ -1,0 +1,22 @@
+{
+  "entity": {
+    "sensor": {
+      "recordings": { "default": "mdi:filmstrip-box-multiple" },
+      "scheduled": { "default": "mdi:calendar-clock" },
+      "next_recording": { "default": "mdi:record-rec" },
+      "disk_free": { "default": "mdi:harddisk" },
+      "disk_used": { "default": "mdi:harddisk" }
+    },
+    "binary_sensor": {
+      "recording": { "default": "mdi:record-circle-outline", "state": { "on": "mdi:record-rec" } }
+    },
+    "calendar": {
+      "calendar": { "default": "mdi:television-guide" }
+    }
+  },
+  "services": {
+    "record": { "service": "mdi:record-rec" },
+    "record_now": { "service": "mdi:record-circle" },
+    "delete_recording": { "service": "mdi:delete" }
+  }
+}

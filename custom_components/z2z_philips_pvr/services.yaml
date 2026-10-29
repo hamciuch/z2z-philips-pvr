@@ -1,0 +1,63 @@
+record:
+  fields:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: z2z_philips_pvr
+    channel:
+      required: true
+      example: "27"
+      selector:
+        text:
+    start:
+      required: true
+      selector:
+        datetime:
+    end:
+      selector:
+        datetime:
+    duration:
+      example: "01:30:00"
+      selector:
+        duration:
+    name:
+      example: "Film wieczorny"
+      selector:
+        text:
+    force:
+      default: false
+      selector:
+        boolean:
+record_now:
+  fields:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: z2z_philips_pvr
+    channel:
+      example: "27"
+      selector:
+        text:
+    duration:
+      default:
+        hours: 1
+      selector:
+        duration:
+    name:
+      selector:
+        text:
+    force:
+      default: false
+      selector:
+        boolean:
+delete_recording:
+  fields:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: z2z_philips_pvr
+    recording_id:
+      required: true
+      example: "119"
+      selector:
+        object:

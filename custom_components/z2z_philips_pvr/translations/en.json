@@ -1,0 +1,193 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Philips TV recordings",
+        "menu_options": {
+          "reuse": "Use the credentials of the Philips TV integration",
+          "manual": "Enter host and credentials manually"
+        }
+      },
+      "reuse": {
+        "title": "Choose the TV",
+        "data": {
+          "source_entry": "Philips TV"
+        },
+        "data_description": {
+          "source_entry": "Host and paired JointSPACE credentials are copied from this Philips TV entry."
+        }
+      },
+      "manual": {
+        "title": "Philips TV (JointSPACE)",
+        "data": {
+          "host": "Host",
+          "username": "Username",
+          "password": "Password"
+        },
+        "data_description": {
+          "host": "IP address of the TV.",
+          "username": "JointSPACE digest user created when the TV was paired (port 1926).",
+          "password": "JointSPACE digest password created when the TV was paired."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Credentials rejected",
+        "description": "The TV at {host} rejected the stored credentials. Enter the current JointSPACE credentials (e.g. from the Philips TV integration).",
+        "data": {
+          "username": "Username",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect",
+      "invalid_auth": "Invalid authentication",
+      "not_supported": "This TV does not expose the JointSPACE recordings API.",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "Device is already configured",
+      "reauth_successful": "Re-authentication was successful"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "recordings": {
+        "name": "Recordings"
+      },
+      "scheduled": {
+        "name": "Scheduled recordings"
+      },
+      "next_recording": {
+        "name": "Next recording"
+      },
+      "disk_free": {
+        "name": "Disk free"
+      },
+      "disk_used": {
+        "name": "Disk used"
+      }
+    },
+    "binary_sensor": {
+      "recording": {
+        "name": "Recording"
+      },
+      "disk_problem": {
+        "name": "Recording disk"
+      },
+      "overrun": {
+        "name": "Recording overrun"
+      },
+      "failed": {
+        "name": "Recording failed"
+      }
+    },
+    "calendar": {
+      "calendar": {
+        "name": "Recordings"
+      }
+    }
+  },
+  "exceptions": {
+    "no_entry": {
+      "message": "No loaded Philips PVR entry found."
+    },
+    "multiple_entries": {
+      "message": "Several TVs are configured — pass config_entry_id."
+    },
+    "unknown_channel": {
+      "message": "Unknown channel: {channel}. Use the channel number from the remote, its exact name or its ccid."
+    },
+    "unknown_recording": {
+      "message": "Unknown recording id(s): {ids}."
+    },
+    "invalid_duration": {
+      "message": "Duration must be between 1 minute and 12 hours."
+    },
+    "in_the_past": {
+      "message": "The recording would end in the past."
+    },
+    "conflict": {
+      "message": "The TV reports a conflict with: {conflicts}. Use force to schedule anyway."
+    },
+    "no_current_channel": {
+      "message": "The TV is not showing a TV channel — pass a channel."
+    }
+  },
+  "services": {
+    "record": {
+      "name": "Record",
+      "description": "Schedule a time-based recording on the TV's USB disk.",
+      "fields": {
+        "config_entry_id": {
+          "name": "TV",
+          "description": "Only needed with more than one TV."
+        },
+        "channel": {
+          "name": "Channel",
+          "description": "Channel number as on the remote, exact channel name or ccid."
+        },
+        "start": {
+          "name": "Start",
+          "description": "Start time. A start in the past records the rest of the programme."
+        },
+        "end": {
+          "name": "End",
+          "description": "End time (or use duration)."
+        },
+        "duration": {
+          "name": "Duration",
+          "description": "Recording length (or use end)."
+        },
+        "name": {
+          "name": "Name",
+          "description": "Title shown in the TV's recordings list."
+        },
+        "force": {
+          "name": "Force",
+          "description": "Schedule even if the TV reports a conflict."
+        }
+      }
+    },
+    "record_now": {
+      "name": "Record now",
+      "description": "Start recording within about two minutes (the TV needs a short lead time).",
+      "fields": {
+        "config_entry_id": {
+          "name": "TV",
+          "description": "Only needed with more than one TV."
+        },
+        "channel": {
+          "name": "Channel",
+          "description": "Defaults to the channel the TV is showing."
+        },
+        "duration": {
+          "name": "Duration",
+          "description": "Recording length."
+        },
+        "name": {
+          "name": "Name",
+          "description": "Title shown in the TV's recordings list."
+        },
+        "force": {
+          "name": "Force",
+          "description": "Schedule even if the TV reports a conflict."
+        }
+      }
+    },
+    "delete_recording": {
+      "name": "Delete recording",
+      "description": "Cancel a scheduled recording or delete a finished one (the file is removed from the TV disk).",
+      "fields": {
+        "config_entry_id": {
+          "name": "TV",
+          "description": "Only needed with more than one TV."
+        },
+        "recording_id": {
+          "name": "Recording ID",
+          "description": "One id or a list of ids (see the sensors' attributes)."
+        }
+      }
+    }
+  }
+}

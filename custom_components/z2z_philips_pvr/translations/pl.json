@@ -1,0 +1,104 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Nagrywanie Philips TV",
+        "menu_options": {
+          "reuse": "Użyj danych logowania z integracji Philips TV",
+          "manual": "Podaj adres i dane logowania ręcznie"
+        }
+      },
+      "reuse": {
+        "title": "Wybierz telewizor",
+        "data": { "source_entry": "Philips TV" },
+        "data_description": { "source_entry": "Adres i sparowane dane JointSPACE zostaną skopiowane z tego wpisu Philips TV." }
+      },
+      "manual": {
+        "title": "Philips TV (JointSPACE)",
+        "data": { "host": "Host", "username": "Nazwa użytkownika", "password": "Hasło" },
+        "data_description": {
+          "host": "Adres IP telewizora.",
+          "username": "Użytkownik digest JointSPACE utworzony przy parowaniu TV (port 1926).",
+          "password": "Hasło digest JointSPACE utworzone przy parowaniu TV."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Dane logowania odrzucone",
+        "description": "Telewizor {host} odrzucił zapisane dane. Podaj aktualne dane JointSPACE (np. z integracji Philips TV).",
+        "data": { "username": "Nazwa użytkownika", "password": "Hasło" }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nie można połączyć się z telewizorem",
+      "invalid_auth": "Nieprawidłowe dane logowania",
+      "not_supported": "Ten telewizor nie udostępnia API nagrań JointSPACE.",
+      "unknown": "Nieoczekiwany błąd"
+    },
+    "abort": {
+      "already_configured": "Ten telewizor jest już skonfigurowany",
+      "reauth_successful": "Ponowne uwierzytelnienie zakończone sukcesem"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "recordings": { "name": "Nagrania" },
+      "scheduled": { "name": "Zaplanowane nagrania" },
+      "next_recording": { "name": "Następne nagranie" },
+      "disk_free": { "name": "Wolne miejsce na dysku" },
+      "disk_used": { "name": "Zajętość dysku" }
+    },
+    "binary_sensor": {
+      "recording": { "name": "Nagrywanie" },
+      "disk_problem": { "name": "Dysk nagrań" },
+      "overrun": { "name": "Nagranie przeciągnięte" },
+      "failed": { "name": "Nieudane nagranie" }
+    },
+    "calendar": {
+      "calendar": { "name": "Nagrania" }
+    }
+  },
+  "exceptions": {
+    "no_entry": { "message": "Brak załadowanej integracji Philips PVR." },
+    "multiple_entries": { "message": "Skonfigurowano kilka telewizorów — podaj config_entry_id." },
+    "unknown_channel": { "message": "Nieznany kanał: {channel}. Podaj numer z pilota, dokładną nazwę albo ccid." },
+    "unknown_recording": { "message": "Nieznane ID nagrania: {ids}." },
+    "invalid_duration": { "message": "Czas nagrania musi wynosić od 1 minuty do 12 godzin." },
+    "in_the_past": { "message": "Nagranie skończyłoby się w przeszłości." },
+    "conflict": { "message": "Telewizor zgłasza konflikt z: {conflicts}. Użyj opcji force, aby zaplanować mimo to." },
+    "no_current_channel": { "message": "Telewizor nie pokazuje kanału TV — podaj kanał." }
+  },
+  "services": {
+    "record": {
+      "name": "Nagraj",
+      "description": "Zaplanuj nagranie po czasie na dysku USB telewizora.",
+      "fields": {
+        "config_entry_id": { "name": "Telewizor", "description": "Potrzebne tylko przy kilku telewizorach." },
+        "channel": { "name": "Kanał", "description": "Numer kanału z pilota, dokładna nazwa albo ccid." },
+        "start": { "name": "Początek", "description": "Godzina startu. Start w przeszłości nagra resztę programu." },
+        "end": { "name": "Koniec", "description": "Godzina końca (albo podaj czas trwania)." },
+        "duration": { "name": "Czas trwania", "description": "Długość nagrania (albo podaj koniec)." },
+        "name": { "name": "Nazwa", "description": "Tytuł na liście nagrań w telewizorze." },
+        "force": { "name": "Wymuś", "description": "Zaplanuj mimo konfliktu zgłoszonego przez TV." }
+      }
+    },
+    "record_now": {
+      "name": "Nagraj teraz",
+      "description": "Rozpocznij nagrywanie w ciągu ok. dwóch minut (TV potrzebuje chwili wyprzedzenia).",
+      "fields": {
+        "config_entry_id": { "name": "Telewizor", "description": "Potrzebne tylko przy kilku telewizorach." },
+        "channel": { "name": "Kanał", "description": "Domyślnie kanał oglądany na TV." },
+        "duration": { "name": "Czas trwania", "description": "Długość nagrania." },
+        "name": { "name": "Nazwa", "description": "Tytuł na liście nagrań w telewizorze." },
+        "force": { "name": "Wymuś", "description": "Zaplanuj mimo konfliktu zgłoszonego przez TV." }
+      }
+    },
+    "delete_recording": {
+      "name": "Usuń nagranie",
+      "description": "Anuluj zaplanowane nagranie albo usuń gotowe (plik zostanie skasowany z dysku TV).",
+      "fields": {
+        "config_entry_id": { "name": "Telewizor", "description": "Potrzebne tylko przy kilku telewizorach." },
+        "recording_id": { "name": "ID nagrania", "description": "Jedno ID albo lista (zobacz atrybuty sensorów)." }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "domain": "z2z_philips_pvr",
+  "name": "Z2Z Philips PVR",
+  "codeowners": ["@hamciuch"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/hamciuch/z2z-philips-pvr",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/hamciuch/z2z-philips-pvr/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
